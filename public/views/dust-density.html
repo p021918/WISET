@@ -1,0 +1,105 @@
+<px-card header-text="Dust Density Info">
+    <style is="custom-style">
+        .badge {
+            width: 500px;
+            height: 500px;
+        }
+        .show {
+
+        }
+        .hide {
+            display: none;
+        }
+        .big {
+          --iron-icon-height: 100px;
+          --iron-icon-width: 100px;
+        }
+    </style>
+
+    <h1 class="epsilon">
+        &nbsp; 서울시 미세먼지 농도
+    </h1>
+
+    <p>
+        &nbsp; 서울시에서 수집되고 있는 미세먼지 정보입니다.
+    </p>
+
+    <form role="form" ng-submit="updateData()">
+
+        <input type="text" class="hide" name="dateTime" id="dateTimeModel" ng-model="dateTime" />
+        <input type="text" class="hide" name="location" id="locationModel" ng-model="location" />
+        <div class="layout layout--bottom">
+
+            <div class="layout__item u-mr0">
+                <label for="dateTime">Pick a date: &nbsp;</label>
+                <px-datetime-picker id="dateTime"
+                                    date-format="YYYY-MM-DD"
+                                    time-format="hh A"
+                                    show-buttons="false"
+                                    block-future-dates="true"
+                                    show-time-zone="none"
+                                    time-zone="Asia/Seoul">
+                </px-datetime-picker>
+            </div>
+
+            <div class="layout__item u-m0">
+                <label for="location">Select a place:  &nbsp;</label>
+                <px-dropdown id="location" display-value="위치 선택" value="{{location}}">
+                    <px-dropdown-content class="px-dropdown-content" items="{{places}}">
+                    </px-dropdown-content>
+                </px-dropdown>
+            </div>
+            <div class="layout__item u-m0">
+                <input id="submit" type="submit" class="btn btn--primary" value="검색"/>
+            </div>
+        </div>
+    </form>
+
+    <div class="layout layout-middle layout--center layout--full u-p++">
+        <div ng-if="dustInfo.value < threshGood">
+            <iron-icon icon="custom:mood" class="badge badge-good" style="fill:blue"></iron-icon>
+        </div>
+        <div ng-if="dustInfo.value >= threshGood && dustInfo.value < threshSoso">
+            <iron-icon icon="custom:mood" class="badge badge-good" style="fill:green"></iron-icon>
+        </div>
+        <div ng-if="dustInfo.value >= threshSoso && dustInfo.value < threshBad">
+            <iron-icon icon="custom:mood-bad" class="badge badge-bad big" style="fill:yellow"></iron-icon>
+        </div>
+        <div ng-if="dustInfo.value > threshBad">
+            <iron-icon icon="custom:mood-bad" class="badge badge-bad" style="fill:red"></iron-icon>
+        </div>
+
+        <ul>
+            <li><iron-icon icon="custom:mood" class="big" style="fill:blue"></iron-icon> 0~30㎍/㎥: 좋음</li>
+            <li><iron-icon icon="custom:mood" class="big" style="fill:green"></iron-icon> 31~80㎍/㎥: 보통</li>
+            <li><iron-icon icon="custom:mood-bad" class="big" style="fill:yellow"></iron-icon> 81~150㎍/㎥: 나쁨</li>
+            <li><iron-icon icon="custom:mood-bad" class="big" style="fill:red"></iron-icon> 151㎍/㎥~: 매우 나쁨</li>
+        </ul>
+
+    </div>
+
+    <script>
+        (function ($) {
+            var dateTime = $('input#dateTimeModel'),
+                location = $('input#locationModel');
+
+            document.querySelector('input#dateTimeModel').addEventListener('ready', function(e) {
+                console.log(e.target);
+            });
+
+            $(document).ready(function(){
+                setTimeout(function(){
+                    dateTime.val(document.querySelector('px-datetime-picker').dateTime).trigger('input');
+                }, 1000);
+            });
+
+            document.querySelector('px-datetime-picker').addEventListener('px-datetime-submitted', function (e) {
+                dateTime.val(e.target.dateTime).trigger('input');
+            });
+
+            document.querySelector('px-dropdown').addEventListener('change', function (e) {
+                location.val(e.target.value).trigger('input');
+            });
+        })(jQuery);
+    </script>
+</px-card>

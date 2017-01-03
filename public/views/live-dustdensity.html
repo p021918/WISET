@@ -1,0 +1,11 @@
+<px-card id="realtime-dustdensity" , header-text="Real Time Dust Density">
+    <FONT face = "돋움">
+    <h1>&nbsp; 실시간 미세먼지 농도</h1>
+    <p>&nbsp; Raspberry Pi와 연결된 먼지센서에서 실시간으로 수집되는 먼지 농도입니다.</p>
+
+    <px-vis-timeseries height="300" width="800" prevent-resize="true" selection-type="xy"
+                       register-location="top"
+                       chart-data="{{liveChartData}}"
+                       include-all-series="true">
+    </px-vis-timeseries>
+</px-card>

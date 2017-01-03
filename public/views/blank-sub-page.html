@@ -1,0 +1,22 @@
+<blank-card id="second-card"></blank-card>
+
+
+<px-deck id="deck-1">
+    <my-temperature-card id="card-1" title="San Ramon Temperature"postal="94582" unit="F"></my-temperature-card>
+    <my-temperature-card id="card-3" title="Walnut Creek Temperature" postal="94595" unit="F"></my-temperature-card>
+</px-deck>
+
+<px-context-browser
+        browser-context='{{initialContexts}}'
+        handlers="ngScope:handlers"
+        opened-item-name="{{initialContextName}}"
+        show-chevron="true">
+	<px-deck-selector ng-bind-polymer decks="{{decks}}" selected-deck="{{selectedDeck}}" ></px-deck-selector>
+</px-context-browser>
+
+<px-dashboard view-service-base-url="{{viewServiceBaseUrl}}" selected-deck-id="{{selectedDeck.id}}" context="{{context}}"></px-dashboard>
+
+<px-deck id="deck-1">
+    <my-temperature-card id="card-1" title="San Ramon Temperature"postal="94582" unit="F"></my-temperature-card>
+    <my-temperature-card id="card-3" title="Walnut Creek Temperature" postal="94595" unit="F"></my-temperature-card>
+</px-deck>

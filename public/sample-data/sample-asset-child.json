@@ -1,0 +1,17 @@
+[{
+    "title": "San Ramon Temperature",
+    "slug": "my-temperature-card",
+    "attributes": {
+        "postal": "94582",
+        "unit": "F"
+    }
+},
+{
+    "title": "Walnut Creek Temperature",
+    "slug": "my-temperature-card",
+    "attributes": {
+        "postal": "94595",
+        "unit": "F"
+    }
+}]
+
